@@ -34,7 +34,7 @@ public class DefaultEntityCache implements EntityCache {
             }
             return t;
         } finally {
-            cacheEntityCreator.fill(tClass, this);
+            cacheEntityCreator.fill(tClass, this, this.cacheSize);
         }
     }
 
@@ -42,6 +42,11 @@ public class DefaultEntityCache implements EntityCache {
     public <T extends Entity> void add(T t) {
         ConcurrentLinkedQueue<T> concurrentLinkedQueue = (ConcurrentLinkedQueue<T>) queue(t.getClass());
         concurrentLinkedQueue.add(t);
+    }
+
+    @Override
+    public <T extends Entity> int sizeOf(Class<T> tClass) {
+        return queue(tClass).size();
     }
 
     private <T extends Entity> ConcurrentLinkedQueue<T> queue(Class<T> tClass) {

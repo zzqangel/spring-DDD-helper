@@ -7,4 +7,6 @@ public interface EntityCache {
     <T extends Entity> T poll(Class<T> tClass);
 
     <T extends Entity> void add(T t);
+
+    <T extends Entity> int sizeOf(Class<T> tClass);
 }
