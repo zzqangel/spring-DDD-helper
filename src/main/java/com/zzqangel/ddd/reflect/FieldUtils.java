@@ -31,5 +31,14 @@ public class FieldUtils {
     public static Class getType(Field field) {
         return field.getType();
     }
-
+    public static Object get(Field field, Object o) {
+        if(!field.isAccessible()) {
+            field.setAccessible(true);
+        }
+        try {
+            return field.get(o);
+        } catch (IllegalAccessException e) {
+            return null;
+        }
+    }
 }
